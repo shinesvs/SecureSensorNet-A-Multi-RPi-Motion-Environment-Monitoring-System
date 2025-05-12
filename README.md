@@ -1,68 +1,24 @@
-# SecureSensorNet-A-Multi-RPi-Motion-Environment-Monitoring-System
+# Secure Raspberry Pi-Based IoT System for Sensor Data Acquisition and Integrity Assurance
 
-SecureSensorNet is a distributed multi-sensor monitoring system built using Raspberry Pi devices, designed for secure and coordinated data collection at the edge. Each Raspberry Pi node is equipped with different sensors (PIR motion, temperature/humidity, camera) and communicates securely over MQTT using TLS 1.3 encryption.
 
-This system supports:
+🔐 Secure IoT Sensor Node with Video Integrity Verification
+This project presents the design and implementation of a secure, Raspberry Pi–based IoT sensor node for real-time environmental and motion monitoring. The system integrates multiple sensors:
 
-Real-time environmental sensing (temperature, humidity, motion)
+🟢 PIR Motion Sensor for detecting movement
 
-Motion-triggered video recording and coordination across nodes
+🌡️ AHT20 Temperature & Humidity Sensor via I2C
 
-Secure MQTT communication using custom TLS certificates
+📷 USB Camera for capturing short video clips when motion is detected
 
-Structured data publishing in JSON format
+Data is transmitted using the MQTT protocol secured with TLS 1.3 and mutual certificate-based authentication. All sensor readings are formatted in JSON and sent to a central MQTT broker (hosted on a laptop), where they are logged in real time.
 
-Centralized logging and CSV/JSON storage for ML-ready datasets
+To ensure the integrity of video recordings, the Raspberry Pi computes a SHA-256 hash for each motion-triggered video file. This hash is included in the MQTT payload, allowing the receiver to verify the authenticity of the video after it’s transferred via SCP.
 
-The project demonstrates a scalable and intelligent IoT edge solution suitable for smart environments, surveillance systems, or anomaly detection research.
+The system is designed to be modular and scalable, supporting future extensions to a multi-node network. It also lays the groundwork for integration with neuromorphic computing models or anomaly detection algorithms for intelligent IoT and smart grid security applications.
 
- Hardware Setup
-This project uses three Raspberry Pi nodes, each equipped with different sensors and peripherals. All nodes communicate over a shared Wi-Fi network using a secure MQTT protocol.
 
-🧩 Node Configurations:
-✅ Node 1: Motion Sensor Node
-Device: Raspberry Pi 3B+/4
 
-Sensor: PIR Motion Sensor (connected to GPIO17)
 
-Functionality:
-
-Detects motion and publishes alert messages to MQTT broker.
-
-Triggers video recording on other nodes.
-
-✅ Node 2: Environmental Sensor Node
-Device: Raspberry Pi 3B+/4
-
-Sensor: AHT20 (Temperature + Humidity) Sensor via I²C
-
-Functionality:
-
-Reads ambient temperature and humidity periodically.
-
-Publishes environmental data with timestamps.
-
-✅ Node 3: Camera Node
-Device: Raspberry Pi with Camera Module or USB Webcam
-
-Peripheral: /dev/video0 (e.g., USB webcam)
-
-Functionality:
-
-Subscribes to motion detection messages.
-
-Records 10-second videos locally when motion is detected.
-
-Publishes metadata about video events to MQTT broker.
-
-🌐 Networking Setup
-All Raspberry Pis are connected to the same local Wi-Fi network.
-
-A central MQTT broker (hosted on a laptop or Raspberry Pi) facilitates secure communication.
-
-TLS 1.3 is used for encrypted data exchange.
-
-Devices are authenticated using client-side certificates.
 
 
 
