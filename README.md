@@ -1,7 +1,7 @@
 # Secure Raspberry Pi-Based IoT System for Sensor Data Acquisition and Integrity Assurance
 
 
-🔐 Secure IoT Sensor Node with Video Integrity Verification
+
 This project presents the design and implementation of a secure, Raspberry Pi–based IoT sensor node for real-time environmental and motion monitoring. The system integrates multiple sensors:
 
 🟢 PIR Motion Sensor for detecting movement
